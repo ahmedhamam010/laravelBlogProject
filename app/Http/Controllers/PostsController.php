@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PostBlogRequest;
+
 use App\Post;
 class PostsController extends Controller
 {
@@ -11,15 +13,11 @@ class PostsController extends Controller
         return view('posts.index' , ['posts' => Post::all() ]);
     }
 
-    function store ( Request $request ) {
-        $validatedData = $request->validate([
-            'title' => 'required|unique:posts|min:3',
-            'content' => 'min:10',
-        ]);
-
+    function store ( PostBlogRequest $request ) {
         $post = new Post;
-        $post->title = request()->title;
-        $post->content = request()->content;
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->user_id  = request()->user()->id;
         $post->save();
         return redirect('posts');
     }
@@ -35,7 +33,7 @@ class PostsController extends Controller
         return view( 'posts.edit' , ['postId' => $postId  , 'idDetails' =>  Post::find($postId) ] );
     }
 
-    function update($id){
+    function update(PostBlogRequest $request,$id){
 
         $post = Post::find($id);
         $post->title = request()->title;

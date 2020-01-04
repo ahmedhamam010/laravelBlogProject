@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @section('content')
-@if ($errors->any())
+
+<div class="container">
+  <form method="post" action="/posts">
+
+  @csrf
+
+  @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -9,9 +15,6 @@
         </ul>
     </div>
 @endif
-<div class="container">
-  <form method="post" action="/posts">
-  @csrf
     <div class="form-group">
       <label for="title">title:</label>
       <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">

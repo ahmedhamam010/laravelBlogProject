@@ -24,5 +24,23 @@
      
     </tbody>
   </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Registered At</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ $posts->user->name }}</td>
+        <td>{{ $posts->user->email }}</td>
+        <td>{{ $posts->user->created_at }}</td>
+
+      </tr>
+     
+    </tbody>
+  </table>
 </div>
 @endsection

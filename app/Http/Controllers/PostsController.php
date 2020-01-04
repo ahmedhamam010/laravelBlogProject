@@ -11,7 +11,12 @@ class PostsController extends Controller
         return view('posts.index' , ['posts' => Post::all() ]);
     }
 
-    function store () {
+    function store ( Request $request ) {
+        $validatedData = $request->validate([
+            'title' => 'required|unique:posts|min:3',
+            'content' => 'min:10',
+        ]);
+
         $post = new Post;
         $post->title = request()->title;
         $post->content = request()->content;

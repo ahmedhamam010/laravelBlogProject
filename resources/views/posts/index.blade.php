@@ -1,8 +1,11 @@
 @extends('layouts.app')
+
 @section('sidebar')
     @parent
+
 @endsection
 
+@section('content')
 <div class="container">
 <a class="btn btn-success" href="/posts/create"> Create Post </a>         
   <table class="table">
@@ -21,7 +24,7 @@
         <td>{{ $value['id'] }}</td>
         <td>{{ $value['title'] }}</td>
         <td>{{ $value['content'] }}</td>
-        <td>{{ $value['created_at'] }}</td>
+        <td>{{ $value['created_at']->format('d/m/Y') }}</td>
         <td>
         <a class="btn btn-success" href="/posts/{{ $value['id'] }}">view</a>
         <a class="btn btn-primary" href="/posts/{{ $value['id'] }}/edit">edit</a>
@@ -39,8 +42,10 @@
   </table>
 </div>
 
-@section('footer')
-    @parent
 @endsection
 
 
+@section('footer')
+    @parent
+
+@endsection

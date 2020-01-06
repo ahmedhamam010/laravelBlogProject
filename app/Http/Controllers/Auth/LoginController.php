@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
+use App\User;
 class LoginController extends Controller
 {
     /*
@@ -43,9 +44,9 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function redirectToProvider()
+    public function redirectToProvider($driver)
     {
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver($driver)->redirect();
     }
 
     /**
@@ -53,10 +54,32 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback($driver)
     {
-        $user = Socialite::driver('github')->user();
+        // dd(Socialite::driver($driver)->user());
 
-        dd($user);
+        // try {
+        //     $user = Socialite::driver($driver)->user();
+        // } catch (\Exception $e) {
+        //     return redirect()->route('login');
+        // }
+        // $existingUser = User::where('email', $user->getEmail())->first();
+        // if ($existingUser) {
+        //     auth()->login($existingUser, true);
+        // } else {
+        //     $newUser                    = new User;
+        //     $newUser->provider_name     = $driver;
+        //     $newUser->provider_id       = $user->getId();
+        //     $newUser->name              = $user->nickname();
+        //     $newUser->email             = $user->getEmail();
+        //     $newUser->email_verified_at = now();
+        //     $newUser->save();
+    
+        //     auth()->login($newUser, true);
+        // }
+    
+        // return redirect($this->redirectPath());
+    
+
     }
 }

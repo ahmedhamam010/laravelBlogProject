@@ -34,7 +34,11 @@ Route::delete('/posts/{post}' , 'PostsController@destroy' )->middleware('auth');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
-Route::get('login/github', 'Auth\LoginController@redirectToProvider');
-Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('/login/{driver}', 'Auth\LoginController@redirectToProvider')
+    ->name('login.provider')
+    ->where('driver', implode('|', config('auth.socialite.drivers')));
+Route::get('/login/{driver}/callback', 'Auth\LoginController@handleProviderCallback')
+    ->name('login.callback')
+    ->where('driver', implode('|', config('auth.socialite.drivers')));
+// Route::get('login/github', 'Auth\LoginController@redirectToProvider');
+// Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');

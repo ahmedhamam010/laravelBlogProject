@@ -100,6 +100,12 @@ return [
             'throttle' => 60,
         ],
     ],
+    'socialite' => [
+        'drivers' => [
+            'google',
+            'github',
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -114,10 +120,6 @@ return [
 
     'password_timeout' => 10800,
 
-    'socialite' => [
-        'drivers' => [
-            'google',
-        ],
-    ],
+    
 
 ];
